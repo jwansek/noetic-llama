@@ -1,0 +1,12 @@
+functioncall = alphanums lparen argdecl* rparen
+argdecl = alphanums equals value comma?
+value = functioncall / string / real / int
+equals = ws? "=" ws?
+comma = ws? "," ws?
+lparen = ws? "(" ws?
+rparen = ws? ")" ws?
+alphanums = ~r"[a-z0-9_]+"
+string = ~r"['\"].*['\"]"
+real = ~r"\d*\.\d+"
+int = ~r"\d+"
+ws = ~"\s*"

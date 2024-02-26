@@ -13,7 +13,8 @@
     "--security-opt=apparmor:unconfined",
     "--volume=/tmp/.X11-unix:/tmp/.X11-unix",
     "--volume=/home/agilex/.Xauthority:/home/ros/.Xauthority",
-    "--gpus=all"
+    "--gpus=all",
+    "--env-file","apikeys.env"
   ],
   "containerEnv": {
     "DISPLAY": ":0",

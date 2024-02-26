@@ -1,0 +1,11 @@
+FROM {{ model }}
+SYSTEM """
+{%- for functioncapability in functioncapabilities %}
+Function:
+def {{ functioncapability.functioname }}({{ ", ".join(functioncapability.argnames) }}):
+    '''
+    {{ functioncapability.docstring|indent(4, False) }}
+    '''
+{% endfor %}
+User Query: {query}<human_end>
+"""
