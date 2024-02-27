@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from dataclasses import dataclass
-from ollamawrapper.srv import OllamaCall, OllamaCallResponse
+from ollamamessages.srv import OllamaCall, OllamaCallResponse
 import inspect
 import typing
 import jinja2
@@ -53,7 +53,7 @@ def getfunctioncapabilities():
 def get_functions(ollama_output):
     return [f.strip() for f in ollama_output[8:].strip().split(";") if f != ""]
 
-def main():
+def main(prompt):
     functioncapabilities = getfunctioncapabilities()
     modelfile = functioncapabilities.to_modelfile("nexusraven:13b-v2-q3_K_S")
 
@@ -63,18 +63,27 @@ def main():
 
     # with open("Modelfile", "r") as f:
     #    ollama.create(model = "temp", modelfile= f.read())
-    ollama_output = client.generate(model='temp', prompt='What\'s the weather like in Lincoln right now? What\'s 2 + 2?', options={"stop": ["Thought:"]})
-    print(ollama_output)
+    ollama_output = client.generate(model='temp', prompt = prompt, options={"stop": ["Thought:"]})
+    #print(ollama_output)
 
     for func_str in get_functions(ollama_output["response"]):
         print(func_str + ":")
         exec(func_str)
 
     client.delete("temp")
+    return ollama_output
 
 def handle_ollama_call(req):
-    print("Recieved ollama request %s" % req.input)
-    return OllamaCallResponse(1, 2, 3, 4, 5, 6)
+    print("Recieved ollama request '%s'" % req.input)
+    o = main(req.input)
+    # print(o.keys())
+    return OllamaCallResponse(
+        o["total_duration"],
+        o["load_duration"],
+        o["prompt_eval_duration"],
+        o["eval_count"],
+        o["eval_duration"]
+    )
 
 def handle_ollama_server():
     rospy.init_node("ollama_wrapper_server")

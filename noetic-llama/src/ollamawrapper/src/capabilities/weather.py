@@ -3,8 +3,10 @@ import dotenv
 import geocoder
 import requests 
 
-if os.path.exists(os.path.join(os.path.dirname(__file__), "..", "..", "..", "apikeys.env")):
-    dotenv.load_dotenv(os.path.join(os.path.dirname(__file__), "..", "..", "..", "apikeys.env"))
+APIKEYS_PATH = "/home/eden/Documents/noetic-llama/noetic-llama/apikeys.env"
+# APIKEYS_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "..", "apikeys.env")
+if os.path.exists(APIKEYS_PATH):
+    dotenv.load_dotenv(APIKEYS_PATH)
 
 if "BINGMAPS" not in os.environ:
     raise Exception("'BINGMAPS' API key environment variable not found")
