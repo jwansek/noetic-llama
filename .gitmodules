@@ -1,3 +1,6 @@
 [submodule "ollama-webui"]
 	path = ollama-webui
 	url = https://github.com/ollama-webui/ollama-webui
+[submodule "whisper-asr-webservice"]
+	path = whisper-asr-webservice
+	url = https://github.com/ahmetoner/whisper-asr-webservice

@@ -17,7 +17,7 @@ services:
       - 11434:11434
     pull_policy: always
     tty: true
-    restart: unless-stopped
+    restart: "no"
     image: ollama/ollama:latest
 
   ollama-webui:
@@ -26,7 +26,7 @@ services:
       args:
         OLLAMA_API_BASE_URL: '/ollama/api'
       dockerfile: Dockerfile
-    image: reaweb.uk/ollama-webui
+    image: reg.reaweb.uk/ollama-webui
     depends_on:
       - ollama
     ports:
@@ -35,7 +35,35 @@ services:
       - "OLLAMA_API_BASE_URL=http://ollama:11434/api"
     extra_hosts:
       - host.docker.internal:host-gateway
-    restart: unless-stopped
+    restart: "no"
+
+  whisper-asr-webservice-gpu:
+    build:
+      context: ./whisper-asr-webservice
+      dockerfile: Dockerfile.gpu
+    image: reg.reaweb.uk/whisper-web
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    environment:
+      - ASR_MODEL=base.en
+      - ASR_ENGINE=openai_whisper
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./whisper-asr-webservice/app:/app/app
+      - cache-pip:/root/.cache/pip
+      - cache-poetry:/root/.cache/poetry
+      - cache-whisper:/root/.cache/whisper
+    restart: "no"
 
 volumes:
-  ollama: {}
+  ollama:
+  cache-pip:
+  cache-poetry:
+  cache-whisper:
+  cache-faster-whisper:
