@@ -14,6 +14,9 @@ import capabilities
 # yes we need both
 from capabilities import *
 
+ollama_api_url = rospy.get_param("/stt/ollama_api_url", "192.168.122.1:11434")
+base_ollama_model = rospy.get_param("/stt/ollama_base_model", "nexusraven:13b-q3_K_S")
+
 @dataclass
 class FunctionCapability:
     modulename: str
@@ -55,9 +58,9 @@ def get_functions(ollama_output):
 
 def main(prompt):
     functioncapabilities = getfunctioncapabilities()
-    modelfile = functioncapabilities.to_modelfile("nexusraven:13b-v2-q3_K_S")
+    modelfile = functioncapabilities.to_modelfile(base_ollama_model)
 
-    client = ollama.Client(host = "http://192.168.122.1:11434")
+    client = ollama.Client(host = "http://%s" % ollama_api_url)
 
     client.create(model = "temp", modelfile = modelfile)
 
@@ -67,7 +70,7 @@ def main(prompt):
     #print(ollama_output)
 
     for func_str in get_functions(ollama_output["response"]):
-        print(func_str + ":")
+        rospy.loginfo("Generated function: " + func_str + ":")
         exec(func_str)
 
     client.delete("temp")
@@ -88,7 +91,6 @@ def handle_ollama_call(req):
 def handle_ollama_server():
     rospy.init_node("ollama_wrapper_server")
     s = rospy.Service("/stt/ollamacall", OllamaCall, handle_ollama_call)
-    print("Spin")
     rospy.spin()
 
 if __name__ == "__main__":
