@@ -1,0 +1,6 @@
+string text
+string language
+float64 temperature
+float64 avg_logprob
+float64 compression_ratio
+float64 no_speech_prob

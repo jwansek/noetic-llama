@@ -26,7 +26,7 @@ RUN sudo apt install -y git python3-pip
 # Rosdep update
 RUN rosdep update
 
-RUN pip3 install jinja2 ollama geocoder requests python-dotenv parsimonious
+RUN pip3 install jinja2 ollama geocoder requests python-dotenv parsimonious SpeechRecognition
 
 # Source the ROS setup file
 RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc

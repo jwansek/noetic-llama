@@ -87,7 +87,7 @@ def handle_ollama_call(req):
 
 def handle_ollama_server():
     rospy.init_node("ollama_wrapper_server")
-    s = rospy.Service("ollama_wrapper", OllamaCall, handle_ollama_call)
+    s = rospy.Service("/stt/ollamacall", OllamaCall, handle_ollama_call)
     print("Spin")
     rospy.spin()
 
