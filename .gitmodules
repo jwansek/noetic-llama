@@ -4,3 +4,6 @@
 [submodule "whisper-asr-webservice"]
 	path = whisper-asr-webservice
 	url = https://github.com/ahmetoner/whisper-asr-webservice
+[submodule "noetic-llama/src/pal_msgs"]
+	path = noetic-llama/src/pal_msgs
+	url = git@github.com:pal-robotics/pal_msgs.git

@@ -12,7 +12,7 @@ import time
 import json
 import os
 
-whisper_api_url = rospy.get_param("/stt/whisper_api_url", "192.168.122.1:9000")
+whisper_api_url = rospy.get_param("/stt/whisper_api_url", "127.0.0.1:9000")
 pause = rospy.get_param("/stt/speech_recogn_pause_time", 0.8)
 energy = rospy.get_param("/stt/speech_recogn_energy", 400) 
 dynamic_energy = rospy.get_param("/stt/speech_recogn_dyn_energy_flag", False)
