@@ -15,7 +15,7 @@ import capabilities
 from capabilities import *
 
 ollama_api_url = rospy.get_param("/stt/ollama_api_url", "192.168.122.1:11434")
-base_ollama_model = rospy.get_param("/stt/ollama_base_model", "nexusraven:13b-q3_K_S")
+base_ollama_model = rospy.get_param("/stt/ollama_base_model", "nexusraven:13b-v2-q2_K")
 
 @dataclass
 class FunctionCapability:
