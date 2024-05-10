@@ -7,3 +7,7 @@
 [submodule "noetic-llama/src/pal_msgs"]
 	path = noetic-llama/src/pal_msgs
 	url = git@github.com:pal-robotics/pal_msgs.git
+[submodule "LCASTOR"]
+	path = LCASTOR
+	url = git@github.com:LCAS/LCASTOR.git
+	branch = chatbot_demo
