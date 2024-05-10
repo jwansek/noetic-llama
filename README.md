@@ -3,6 +3,14 @@
 `docker-compose` docker containers required for LCASTOR intent recognition and transcription with whisper.
 Currently, `whisperwrapper` needs to be run outside of docker due to problems passing through the microphone, which is why it is symlinked here.
 
+If being run in a VM, set the whisper API url ROS parameter:
+
+`rosparam set /stt/whisper_api_url 192.168.122.1:9000`
+
+If debugging, you might need to manually make the node transcribe:
+
+`rostopic pub /stt/listening ollamamessages/WhisperListening "listening: True" -1`
+
 Given a python library `capabilities` containing only functions, it inspects this library to generate an initial prompt to tell the 
 LLM the possible functions. Then, with a ROS service call, these functions are called:
 
