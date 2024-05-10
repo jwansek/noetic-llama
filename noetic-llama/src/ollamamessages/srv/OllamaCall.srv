@@ -1,7 +1,0 @@
-string input
----
-int64 total_duration
-int64 load_duration
-int64 prompt_eval_duration
-int64 eval_count
-int64 eval_duration
