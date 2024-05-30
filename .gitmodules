@@ -1,9 +1,11 @@
 [submodule "ollama-webui"]
 	path = ollama-webui
-	url = https://github.com/ollama-webui/ollama-webui
+	url = https://github.com/open-webui/open-webui
+	branch = main
 [submodule "whisper-asr-webservice"]
 	path = whisper-asr-webservice
 	url = https://github.com/ahmetoner/whisper-asr-webservice
+	branch = main
 [submodule "noetic-llama/src/pal_msgs"]
 	path = noetic-llama/src/pal_msgs
 	url = git@github.com:pal-robotics/pal_msgs.git
