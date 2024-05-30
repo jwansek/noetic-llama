@@ -7,29 +7,20 @@ If being run in a VM, set the whisper API url ROS parameter:
 
 `rosparam set /stt/whisper_api_url 192.168.122.1:9000`
 
+If being run on a separate PC to the host, you may need to set these parameters:
+
+`export ROS_MASTER_URI=http://10.68.0.1:11311`
+
+`export ROS_IP=10.68.0.130`
+
+Obviously you should update the IP addresses with the appropirate ones as applicable.
+
 If debugging, you might need to manually make the node transcribe:
 
 `rostopic pub /stt/listening ollamamessages/WhisperListening "listening: True" -1`
 
-Given a python library `capabilities` containing only functions, it inspects this library to generate an initial prompt to tell the 
-LLM the possible functions. Then, with a ROS service call, these functions are called:
-
-`rosrun ollamawrapper ollamawrapper`
-
-`rosservice call /ollama_wrapper "input: What the weather like in Seattle right now? What's 14 plus 217? What's 0 + 1?"`
-
-Response:
-
-```
-Recieved ollama request 'What the weather like in Seattle right now? What's 14 plus 217? What's 0 + 1?'
-get_weather_data(coordinates=get_coordinates_from_city(city_name='Seattle')):
-By 'Seattle' I am assuming you mean 'Seattle, WA'
-The current temperature is 0.100000°C with an outlook of 'Clear sky'
-add(num1=14, num2=217):
-14.000000 + 217.000000 = 231.000000
-add(num1=0, num2=1):
-0.000000 + 1.000000 = 1.000000
-```
+There is a bash script provided to start the whisper node, make sure you have compiled, sourced,
+and are in the correct directory first.
 
 ## TODOs
 
