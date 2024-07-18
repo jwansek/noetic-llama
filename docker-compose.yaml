@@ -18,7 +18,7 @@ services:
     pull_policy: always
     tty: true
     restart: "no"
-    image: ollama/ollama:latest
+    image: ollama/ollama:0.1.44
 
   ollama-webui:
     build:
