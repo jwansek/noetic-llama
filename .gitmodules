@@ -12,4 +12,4 @@
 [submodule "LCASTOR"]
 	path = LCASTOR
 	url = git@github.com:LCAS/LCASTOR.git
-	branch = chatbot_demo
+	branch = gpsr
